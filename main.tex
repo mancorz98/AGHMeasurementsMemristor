@@ -131,7 +131,7 @@
 
 
 \title{Pomiary charakterystyk memrystorów}
-\author{Karol Bednarz,  \\
+\author{Karol Bednarz
 }
 % \date{Rok akademicki 2024--2025}
 \date{\today}
@@ -164,7 +164,25 @@ Schemat pomiarowy oraz zdjęcie stanowiska pomiarowego zamieszczono na rysunkach
     \caption{\subref{fig:schemat} Schemat pomiarowy oraz \subref{fig:stanowisko} zdjęcie stanowiska pomiarowego.}
     \label{fig:diagram}
 \end{figure}
-W badaniach zastosowano kartę pomiarową Analog Discovery 3 firmy Digilent, która umożliwia generowanie sygnałów oraz ich akwizycję. Generacja sygnałów realizowana była za pomocą dedykowanej aplikacji z interfejsem graficznym, opracowanej przy użyciu oficjalnego API WaveForms SDK. Proces akwizycji danych przeprowadzono w taki sposób, aby dla każdego okresu napięcia wejściowego zarejestrować 1000 próbek napięcia wyjściowego. W układzie pomiarowym zastosowano rezystor o wartości \(R = 0{.}1\,\text{k}\Omega\). Dla kazdego zestawu parametrów sygnału wejściowego (częstotliwość, amplituda, wartość offsetu) przeprowadzono pomiary dla 120 okresów.
+W badaniach zastosowano kartę pomiarową Analog Discovery 3 firmy Digilent, która umożliwia generowanie sygnałów oraz ich akwizycję. Generacja sygnałów realizowana była za pomocą dedykowanej aplikacji z interfejsem graficznym, opracowanej przy użyciu oficjalnego API WaveForms SDK. Proces akwizycji danych przeprowadzono w taki sposób, aby dla każdego okresu napięcia wejściowego zarejestrować 1000 próbek napięcia wyjściowego. W układzie pomiarowym zastosowano rezystor o wartości \(R_s = 0{.}1\,\text{k}\Omega\). Dla kazdego zestawu parametrów sygnału wejściowego (częstotliwość, amplituda, wartość offsetu) przeprowadzono pomiary dla 120 okresów.
+
+\section{Wnioski}
+
+\subsection{Charakter pracy memrystorów}
+Większość badanych memrystorów wykazuje zachowanie zbliżone do \textbf{rezystancji nieliniowych} zamiast klasycznego efektu memrystywnego z wyraźną pętlą histerezy. Tylko w nielicznych przypadkach na wykresach wartości średniej obserwuje się charakterystyczną pętlę histerezy.
+
+\subsection{Wpływ częstotliwości na histerezę}
+\begin{itemize}
+    \item {Najwyraźniejsza pętla histerezy} występuje przy {$f = 20$ Hz},
+    \item Przy wyższych częstotliwościach (100 Hz, 1000 Hz, 2000 Hz) pętla histerezy jest słabo widoczna lub nie występuje,
+\end{itemize}
+
+\subsection{Dynamika zmian rezystancji}
+Pomimo słabej widoczności pętli histerezy przy wyższych częstotliwościach, w wielu przypadkach obserwuje się {zmianę rezystancji elementu} (widoczne wypełnienie części płaszczyzny na wykresach). Istotne jest, że {zmiany te nie dokonują się w ciągu jednego okresu}, co sugeruje powolniejszą dynamikę procesów zachodzących w memrystorze w porównaniu z częstotliwością wymuszenia.
+
+
+
+
 
 \section{Pomiary}
 
@@ -172,23 +190,58 @@ W niniejszej sekcji przedstawiono wyniki pomiarów przeprowadzonych dla różnyc
 
 Jako, że otrzymano dużą liczbę wykresów, w niniejszym dokumencie zamieszczono jedynie wybrane przykłady ilustrujące wpływ poszczególnych parametrów sygnału wejściowego na charakterystyki memrystora. Pełny zestaw wyników pomiarów wraz z plikami \texttt{*.csv} dostępny jest w repozytorium pod linkiem: \href{https://drive.google.com/drive/folders/1UvOOOwlVyftE5LcNZPL52J6Lj1X7XBaA}{[1]}. Rozbito również wyniki pomiarów na dwa oddzielne katalogi, ze względu na otrymane dwa różne typy memrystorów. 
 
+Pozycje memrystorów w układzie zostały oznaczone wg. schematu na rusunku \ref{fig:matrix}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/macierz.pdf}
+    \caption{Schemat numeracji memrystorów w układzie pomiarowym.}
+    \label{fig:matrix}
+\end{figure}
 
-\subsection{Memrystor I}
+\newcommand{\memposplot}[2]{%
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{#1}
+        \caption{Pozycja: #2}
+    \end{figure}
+}
+
+
+\subsection{Memrystor w pozycji I (cuaspf)}
+\memposplot{./pos_mems/cuaspf/1_1/temp_0.10_100.0_2.5_Sine_1765395574.png}{ (1,1)}
+\memposplot{./pos_mems/cuaspf/2_2/temp_0.10_10.0_2.5_Sine_1765396062.png}{ (2,2)}
+\memposplot{./pos_mems/cuaspf/2_2/temp_0.10_100.0_2.5_Sine_1765396040.png}{ (2,2)}
+\memposplot{./pos_mems/cuaspf/2_2/temp_0.10_1000.0_2.5_Sine_1765396010.png}{ (2,2)}
+\memposplot{./pos_mems/cuaspf/2_4/temp_0.10_10.0_2.5_Sine_1765396475.png}{ (2,4)}
+\memposplot{./pos_mems/cuaspf/2_4/temp_0.10_100.0_2.5_Sine_1765396456.png}{ (2,4)}
+\memposplot{./pos_mems/cuaspf/2_4/temp_0.10_1000.0_2.5_Sine_1765396486.png}{ (2,4)}
+
+
+\subsection{Memrystor w pozycji II (perwen)}
+
+% \memposplot{./pos_mems/perwen/1_3/temp_0.10_10.0_2.5_Sine_1765400948.png}{(1,3)}
+\memposplot{./pos_mems/perwen/1_3/temp_0.10_100.0_2.5_Sine_1765400958.png}{(1,3)}
+\memposplot{./pos_mems/perwen/1_3/temp_0.10_1000.0_2.5_Sine_1765400969.png}{(1,3)}
+\memposplot{./pos_mems/perwen/1_3/temp_0.10_1000.0_2.5_Sine_1765400983.png}{(1,3)}
+\memposplot{./pos_mems/perwen/1_4/temp_0.10_1000.0_2.5_Sine_1765401101.png}{(1,4)}
+\memposplot{./pos_mems/perwen/2_0/temp_0.10_10.0_2.5_Sine_1765400160.png}{(2,0)}
+\memposplot{./pos_mems/perwen/2_0/temp_0.10_100.0_2.5_Sine_1765400124.png}{(2,0)}
+\memposplot{./pos_mems/perwen/2_0/temp_0.10_1000.0_2.5_Sine_1765400135.png}{(2,0)}
+\memposplot{./pos_mems/perwen/2_1/temp_0.10_10.0_2.5_Sine_1765401431.png}{(2,1)}
+\memposplot{./pos_mems/perwen/2_1/temp_0.10_100.0_2.5_Sine_1765401381.png}{(2,1)}
+\memposplot{./pos_mems/perwen/2_1/temp_0.10_1000.0_2.5_Sine_1765401391.png}{(2,1)}
 
 
 
-% \begin{figure}[htbp]
-%         \centering
-%         \includegraphics[width=0.8\textwidth]{mem1/hysteresis_plots/temp_0.10_100.0_2.5_Sine_1764609477.pdf}
-%         \caption{Caption for}
-% \end{figure}
 
+\section{Wyniki pomiarów, bez sprecyzowanej pozycji memrystora}
+\subsection{Memrystor I (cuaspf)}
 
 \newcommand{\addplot}[1]{%
     \begin{figure}[H]
         \centering
         \includegraphics[width=1\textwidth]{mem1/hysteresis_plots/#1.png}
-        % \caption{Hysteresis plot}
+        \caption{}
     \end{figure}
 }
 
@@ -215,14 +268,14 @@ Jako, że otrzymano dużą liczbę wykresów, w niniejszym dokumencie zamieszczo
 \addplot{temp_0.10_100.0_2.5_Sine_1764611256}
 
 
-\subsection{Memrystor II}
+\subsection{Memrystor II (perwen)}
 
 
 \renewcommand{\addplot}[1]{%
     \begin{figure}[H]
         \centering
         \includegraphics[width=1\textwidth]{mem2/hysteresis_plots/#1.png}
-        % \caption{Hysteresis plot}
+        \caption{}
     \end{figure}
 }
 
